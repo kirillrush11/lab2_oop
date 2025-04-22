@@ -2,31 +2,27 @@
 #define M_VECTOR_ITERATOR_H
 
 template <typename T>
-class m_vector;  // Предварительное объявление класса вектора
+class m_vector;  
 
 template <typename T>
 class m_vector_iterator {
 private:
-    m_vector<T>* container;  // Ссылка на контейнер
-    size_t currentIndex;     // Текущий индекс
+    m_vector<T>* container;
+    size_t currentIndex;    
 
 public:
-    // Конструктор с контейнером и начальным индексом
     explicit m_vector_iterator(m_vector<T>& cont, size_t startIndex = 0)
-        : container(&cont), currentIndex(startIndex) {}
+        : container(&cont), currentIndex(startIndex) {} //изменил выделение памяти//
 
-    // Префиксный инкремент
     m_vector_iterator& operator++() {
         ++currentIndex;
         return *this;
     }
 
-    // Проверка на достижение конца
-    bool is_end() const {
+    bool is_end() const {  //добавил итератор//
         return currentIndex >= container->get_length();
     }
 
-    // Постфиксный инкремент
     m_vector_iterator operator++(int) {
         m_vector_iterator temp = *this;
         ++currentIndex;
@@ -41,7 +37,6 @@ public:
         return (*container)[currentIndex];
     }
 
-    // Доступ к членам
     T* operator->() {
         return &(*container)[currentIndex];
     }
@@ -50,7 +45,6 @@ public:
         return &(*container)[currentIndex];
     }
 
-    // Операторы сравнения
     bool operator==(const m_vector_iterator& other) const {
         return container == other.container && currentIndex == other.currentIndex;
     }
